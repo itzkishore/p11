@@ -25,9 +25,16 @@ pipeline{
                 sh label: '', script: 'mvn clean package'
             }
 		}
-		
-
-		
+		stage('Nexus'){
+		steps{
+			nexusPublisher nexusInstanceId: 'admin', nexusRepositoryId: 'Project1_repo', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: '/var/lib/jenkins/workspace/sample/target/mavenproject-1.0-SNAPSHOT.war']], mavenCoordinate: [artifactId: '', groupId: 'com.aspire', packaging: 'maven-plugin', version: '']]]
+		}
+		}
+		stage('Invoking Ansible'){
+		steps{
+		sh label: '', script: 'sudo ssh -o StrictHostKeyChecking=no root@172.24.199.68 \'sudo ansible-playbook /etc/ansible/ansible.yml\''
+		}
+		}
         stage('Result'){
             steps{
                 echo 'Successfully Completed'
