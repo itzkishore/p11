@@ -27,7 +27,7 @@ pipeline{
 		}
 		stage('Nexus'){
 		steps{
-			nexusPublisher nexusInstanceId: 'admin', nexusRepositoryId: 'Project1_repo', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: '/var/lib/jenkins/workspace/sample/target/mavenproject-1.0-SNAPSHOT.war']], mavenCoordinate: [artifactId: 'artifact', groupId: 'com.aspire', packaging: 'maven', version: '1.2']]], tagName: 'sa'
+			nexusPublisher nexusInstanceId: 'admin', nexusRepositoryId: 'Project1_repo', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: '/var/lib/jenkins/workspace/sample/target/mavenproject-1.0-SNAPSHOT.war']], mavenCoordinate: [artifactId: 'artifact', groupId: 'com.aspire', packaging: 'war', version: '1.2']]], tagName: 'sa'
 		}
 		}
 		stage('Invoking Ansible'){
