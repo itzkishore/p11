@@ -25,7 +25,7 @@ pipeline{
                 sh label: '', script: 'mvn clean package'
             }
 		}
-		stage('Nexus'){
+		stage('Nexus Uploader'){
 		steps{
 			nexusArtifactUploader artifacts: [[artifactId: 'nexus', classifier: '', file: '/var/lib/jenkins/workspace/sample/target/mavenproject-1.0-SNAPSHOT.war', type: 'war']], credentialsId: 'admin', groupId: 'com.aspire', nexusUrl: '172.24.125.116:8889/', nexusVersion: 'nexus3', protocol: 'http', repository: 'Project1_repo', version: '1.32'
 		}
